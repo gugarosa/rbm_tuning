@@ -2,6 +2,8 @@
 .vscode
 data/
 *.pth
+*.history
+*.optimized
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
