@@ -23,7 +23,7 @@ def get_arguments():
 
     parser.add_argument('dataset', help='Dataset identifier', choices=['mnist'])
 
-    parser.add_argument('model_input', help='Path to saved model that will be inputted', type=str)
+    parser.add_argument('model_name', help='Model identifier', choices=['drbm', 'rbm'])
 
     parser.add_argument('mh', help='Meta-heuristic identifier', choices=['pso'])
 
@@ -46,10 +46,8 @@ if __name__ == '__main__':
 
     # Gathering common variables
     dataset = args.dataset
+    name = args.model_name
     seed = args.seed
-
-    # Gathering model's variables
-    model_input = args.model_input
     batch_size = args.batch_size
 
     # Gathering optimization variables
@@ -61,13 +59,13 @@ if __name__ == '__main__':
     hyperparams = o.get_mh(args.mh).hyperparams
 
     # Loads the data
-    train, val, test = l.load_dataset(name=dataset, seed=seed)
+    _, val, _ = l.load_dataset(name=dataset, seed=seed)
 
     # Defining the torch seed
     torch.manual_seed(seed)
 
     # Loads pre-trained model
-    model = torch.load(model_input)
+    model = torch.load(f'{name}.pth')
 
     # Gathering weights from desired layer
     W = model.W.detach().cpu().numpy()
@@ -77,26 +75,22 @@ if __name__ == '__main__':
     ub = list(np.reshape(W + bounds, W.shape[0] * W.shape[1]))
     n_variables = W.shape[0] * W.shape[1]
 
-    # Defining the optimization task
-    opt_fn = t.fine_tune(model, val)
+    # Checks the optimization task
+    if name == 'rbm':
+        # Defines accordingly
+        opt_fn = t.fine_tune_reconstruction(model, val)
+        opt_name = f'{mh_name}_rec_{name}'
+
+    elif name == 'drbm':
+        # Defines accordingly
+        opt_fn = t.fine_tune_classification(model, val)
+        opt_name = f'{mh_name}_clf_{name}'
 
     # Running the optimization task
     history = opt.optimize(mh, opt_fn, n_agents, n_variables, n_iterations, lb, ub, hyperparams)
 
     # Saving history object
-    history.save(f'{model_input}_{mh_name}.history')
-
-    # Reshaping `w` to appropriate size
-    W_best = np.reshape(history.best_agent[-1][0], (W.shape[0], W.shape[1]))
-
-    # Converting numpy to tensor
-    W_best = torch.from_numpy(W_best).float()
-
-    # Replacing the layer weights
-    model.W = torch.nn.Parameter(W_best)
-
-    # Evaluating the model
-    model.reconstruct(test)
+    history.save(f'{opt_name}.history')
 
     # Saving optimized model
-    torch.save(model, f'{model_input}_{mh_name}.optimized')
+    torch.save(model, f'{opt_name}.optimized')

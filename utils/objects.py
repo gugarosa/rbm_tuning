@@ -1,4 +1,4 @@
-from learnergy.models.binary import RBM
+from learnergy.models.binary import DiscriminativeRBM, RBM
 from opytimizer.optimizers.swarm import pso
 
 
@@ -22,6 +22,7 @@ class Model:
 
 # Defines a model dictionary constant with the possible values
 MODEL = dict(
+    drbm=Model(DiscriminativeRBM),
     rbm=Model(RBM)
 )
 

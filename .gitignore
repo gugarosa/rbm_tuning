@@ -1,5 +1,6 @@
 # Unwanted files
 .vscode
+**/*.DS_Store
 data/
 *.pth
 *.history

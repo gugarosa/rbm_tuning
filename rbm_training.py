@@ -20,13 +20,13 @@ def get_arguments():
 
     parser.add_argument('dataset', help='Dataset identifier', choices=['mnist'])
 
-    parser.add_argument('model_name', help='Model identifier', choices=['rbm'])
-
-    parser.add_argument('model_output', help='Identifier to saved model', type=str)
+    parser.add_argument('model_name', help='Model identifier', choices=['drbm', 'rbm'])
 
     parser.add_argument('-n_input', help='Number of input units', type=int, default=784)
 
     parser.add_argument('-n_hidden', help='Number of hidden units', type=int, default=128)
+
+    parser.add_argument('-n_classes', help='Number of classes', type=int, default=10)
 
     parser.add_argument('-steps', help='Number of CD steps', type=int, default=1)
 
@@ -56,9 +56,10 @@ if __name__ == '__main__':
     # Gathering variables from arguments
     dataset = args.dataset
     name = args.model_name
-    output = args.model_output
+    output = f'{name}.pth'
     n_input = args.n_input
     n_hidden = args.n_hidden
+    n_classes = args.n_classes
     steps = args.steps
     lr = args.lr
     momentum = args.momentum
@@ -78,7 +79,7 @@ if __name__ == '__main__':
         use_gpu = True
 
     # Loads the data
-    train, val, test = l.load_dataset(name=dataset, seed=seed)
+    train, _, _ = l.load_dataset(name=dataset, seed=seed)
 
     # Defining the torch seed
     torch.manual_seed(seed)
@@ -86,15 +87,19 @@ if __name__ == '__main__':
     # Gathering the model
     model_obj = o.get_model(name).obj
 
-    # Initializing the model
-    model = model_obj(n_visible=n_input, n_hidden=n_hidden, steps=steps, learning_rate=lr,
-                      momentum=momentum, decay=decay, temperature=T, use_gpu=use_gpu)
+    # Checks the model
+    if name == 'rbm':
+        # Initializes accordingly
+        model = model_obj(n_visible=n_input, n_hidden=n_hidden, steps=steps, learning_rate=lr,
+                          momentum=momentum, decay=decay, temperature=T, use_gpu=use_gpu)
+    
+    elif name == 'drbm':
+        # Initializes accordingly
+        model = model_obj(n_visible=n_input, n_hidden=n_hidden, n_classes=n_classes, steps=steps,
+                          learning_rate=lr, momentum=momentum, decay=decay, temperature=T, use_gpu=use_gpu)
 
     # Fitting the model
     model.fit(train, batch_size=batch_size, epochs=epochs)
-
-    # Evaluating the model
-    model.reconstruct(test)
 
     # Saving model
     torch.save(model, output)
