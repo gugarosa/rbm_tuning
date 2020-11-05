@@ -38,7 +38,7 @@ def get_arguments():
 
     parser.add_argument('-temperature', help='Temperature', type=float, default=1)
 
-    parser.add_argument('-batch_size', help='Batch size', type=int, default=100)
+    parser.add_argument('-batch_size', help='Batch size', type=int, default=128)
 
     parser.add_argument('-epochs', help='Number of training epochs', type=int, default=5)
 

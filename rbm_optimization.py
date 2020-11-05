@@ -79,12 +79,13 @@ if __name__ == '__main__':
     if name == 'rbm':
         # Defines accordingly
         opt_fn = t.fine_tune_reconstruction(model, val)
-        opt_name = f'{mh_name}_rec_{name}'
 
     elif name == 'drbm':
         # Defines accordingly
         opt_fn = t.fine_tune_classification(model, val)
-        opt_name = f'{mh_name}_clf_{name}'
+    
+    # Defines the name of output file
+    opt_name = f'{mh_name}_{name}'
 
     # Running the optimization task
     history = opt.optimize(mh, opt_fn, n_agents, n_variables, n_iterations, lb, ub, hyperparams)
