@@ -93,5 +93,14 @@ if __name__ == '__main__':
     # Saving history object
     history.save(f'{opt_name}.history')
 
+    # Reshaping `W` to appropriate size
+    W_best = np.reshape(history.best_agent[-1][0], (model.W.shape[0], model.W.shape[1]))
+
+    # Converting numpy to tensor
+    W_best = torch.from_numpy(W_best).float()
+
+    # Replaces the model's weight
+    model.W = torch.nn.Parameter(W_best)
+
     # Saving optimized model
     torch.save(model, f'{opt_name}.optimized')
