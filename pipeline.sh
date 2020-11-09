@@ -30,6 +30,9 @@ for SEED in $(seq 1 $N_RUNS); do
     # Optimizes an architecture
     python rbm_optimization.py ${DATA} ${MODEL} ${MH} -batch_size ${BATCH_SIZE} -bounds ${BOUNDS} -n_agents ${N_AGENTS} -n_iter ${N_ITER} -seed ${SEED}
 
+    # Evaluates an architecture
+    python rbm_evaluation.py ${DATA} ${MH}_${MODEL}.optimized -seed ${SEED}
+
     # Stores files in an outputs folder
     mv ${MODEL}.pth outputs/${MODEL}_${SEED}.pth
     mv ${MH}_${MODEL}.history outputs/${MH}_${MODEL}_${SEED}.history

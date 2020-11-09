@@ -19,7 +19,7 @@ If you use our work to fulfill any of your needs, please cite us:
    * `loader.py`: Utility to load datasets and split them into training, validation and testing sets;
    * `objects.py`: Wraps objects instantiation for command line usage;
    * `optimizer.py`: Wraps the optimization task into a single method;  
-   * `target.py`: Implements the objective functios to be optimized.
+   * `target.py`: Implements the objective functions to be optimized.
    
    
 ---
@@ -58,6 +58,14 @@ After conducting the training task, one needs to optimize the weights over the v
 
 ```Python
 python rbm_optimization.py -h
+```
+
+### Model Evaluation
+
+Finally, it is now possible to evaluate a model using the testing set. Please, use the following script to accomplish such a procedure:
+
+```Python
+python rbm_evaluation.py -h
 ```
 
 ### Bash Script
