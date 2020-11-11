@@ -5,6 +5,7 @@ data/
 *.pth
 *.history
 *.optimized
+*.log.*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
