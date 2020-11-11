@@ -7,6 +7,7 @@ N_RUNS=1
 
 # Architecture variables
 MODEL="rbm"
+PARAM="W"
 N_INPUT=784
 N_HIDDEN=128
 N_CLASS=10
@@ -28,7 +29,7 @@ for SEED in $(seq 1 $N_RUNS); do
     python rbm_training.py ${DATA} ${MODEL} -n_input ${N_INPUT} -n_hidden ${N_HIDDEN} -n_classes ${N_CLASS} -steps ${STEPS} -lr ${LR} -momentum ${MOMENTUM} -decay ${DECAY} -temperature ${T} -batch_size ${BATCH_SIZE} -epochs ${EPOCHS} -device ${DEVICE} -seed ${SEED}
 
     # Optimizes an architecture
-    python rbm_optimization.py ${DATA} ${MODEL} ${MH} -batch_size ${BATCH_SIZE} -bounds ${BOUNDS} -n_agents ${N_AGENTS} -n_iter ${N_ITER} -seed ${SEED}
+    python rbm_optimization.py ${DATA} ${MODEL} ${PARAM} ${MH} -batch_size ${BATCH_SIZE} -bounds ${BOUNDS} -n_agents ${N_AGENTS} -n_iter ${N_ITER} -seed ${SEED}
 
     # Evaluates an architecture
     python rbm_evaluation.py ${DATA} ${MH}_${MODEL}.optimized -seed ${SEED}

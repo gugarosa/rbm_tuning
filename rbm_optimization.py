@@ -101,8 +101,10 @@ if __name__ == '__main__':
     # Reshaping parameter to appropriate size
     best_param = np.reshape(history.best_agent[-1][0], (param.shape[0], param.shape[1]))
 
-    # Converting numpy to tensor
+    # Converting numpy to tensor and squeeze its last dimension
+    # Note this makes sure that one-dimensional variables work
     best_param = torch.from_numpy(best_param).float()
+    best_param = torch.squeeze(best_param, -1)
 
     # Replaces the model's parameter
     setattr(model, parameter, torch.nn.Parameter(best_param))

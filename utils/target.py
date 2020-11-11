@@ -7,7 +7,7 @@ def fine_tune_classification(model, parameter, val):
 
     Args:
         model (DRBM): Child object from DRBM class.
-        parameter (torch.Tensor): Parameter to be optimized.
+        parameter (str): Parameter to be optimized.
         val (torchtext.data.Dataset): Validation dataset.
 
     """
@@ -32,6 +32,7 @@ def fine_tune_classification(model, parameter, val):
 
         # Converting numpy to tensor
         current_param = torch.from_numpy(current_param).float()
+        current_param = torch.squeeze(current_param, -1)
 
         # Replaces the model's parameter
         setattr(model, parameter, torch.nn.Parameter(current_param))
@@ -49,7 +50,7 @@ def fine_tune_reconstruction(model, parameter, val):
 
     Args:
         model (RBM): Child object from RBM class.
-        parameter (torch.Tensor): Parameter to be optimized.
+        parameter (str): Parameter to be optimized.
         val (torchtext.data.Dataset): Validation dataset.
 
     """
@@ -74,6 +75,7 @@ def fine_tune_reconstruction(model, parameter, val):
 
         # Converting numpy to tensor
         current_param = torch.from_numpy(current_param).float()
+        current_param = torch.squeeze(current_param, -1)
 
         # Replaces the model's parameter
         setattr(model, parameter, torch.nn.Parameter(current_param))
