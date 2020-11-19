@@ -1,6 +1,6 @@
-# Enhacing Restricted Boltzmann Machines Reconstructability Through Meta-Heuristic Optimization
+# Enhancing Restricted Boltzmann Machines Reconstructability Through Meta-Heuristic Optimization
 
-*This repository holds all the necessary code to run the very-same experiments described in the paper "Enhacing Restricted Boltzmann Machines Reconstructability Through Meta-Heuristic Optimization".*
+*This repository holds all the necessary code to run the very-same experiments described in the paper "Enhancing Restricted Boltzmann Machines Reconstructability Through Meta-Heuristic Optimization".*
 
 ---
 
