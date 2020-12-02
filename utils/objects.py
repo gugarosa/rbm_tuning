@@ -1,4 +1,4 @@
-from learnergy.models.binary import DiscriminativeRBM, RBM
+from learnergy.models.bernoulli import DiscriminativeRBM, RBM
 from opytimizer.optimizers.swarm import pso
 
 
