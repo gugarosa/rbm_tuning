@@ -9,11 +9,12 @@ DATASETS = {
 }
 
 
-def load_dataset(name='mnist', val_split=0.2, seed=0):
+def load_dataset(name='mnist', size=(28, 28), val_split=0.2, seed=0):
     """Loads an input dataset.
 
     Args:
         name (str): Name of dataset to be loaded.
+        size (tuple): Height and width to be resized.
         val_split (float): Percentage of split for the validation set.
         seed (int): Random seed.
 
@@ -28,7 +29,8 @@ def load_dataset(name='mnist', val_split=0.2, seed=0):
     # Loads the training data
     train = DATASETS[name](root='./data', train=True, download=True,
                            transform=tv.transforms.Compose(
-                               [tv.transforms.ToTensor()])
+                               [tv.transforms.ToTensor(),
+                                tv.transforms.Resize(size)])
                            )
 
     # Splitting the training data into training/validation
@@ -38,7 +40,8 @@ def load_dataset(name='mnist', val_split=0.2, seed=0):
     # Loads the testing data
     test = DATASETS[name](root='./data', train=False, download=True,
                           transform=tv.transforms.Compose(
-                              [tv.transforms.ToTensor()])
+                              [tv.transforms.ToTensor(),
+                               tv.transforms.Resize(size)])
                           )
 
     return train, val, test
