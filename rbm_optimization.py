@@ -27,7 +27,7 @@ def get_arguments():
 
     parser.add_argument('parameter', help='Parameter identifier', choices=['a', 'b', 'c', 'U', 'W'])
 
-    parser.add_argument('mh', help='Meta-heuristic identifier', choices=['pso'])
+    parser.add_argument('mh', help='Meta-heuristic identifier', choices=['ba', 'bh', 'de', 'fa', 'ga', 'pso'])
 
     parser.add_argument('-batch_size', help='Batch size', type=int, default=128)
 
