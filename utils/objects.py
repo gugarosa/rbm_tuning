@@ -1,7 +1,7 @@
 from learnergy.models.bernoulli import DiscriminativeRBM, RBM
 from opytimizer.optimizers.evolutionary import de, ga
 from opytimizer.optimizers.science import bh
-from opytimizer.optimizers.swarm import ba, fa, pso
+from opytimizer.optimizers.swarm import ba, fa, js, pso
 
 
 class Model:
@@ -79,6 +79,7 @@ MH = dict(
     de=MetaHeuristic(de.DE, dict(CR=0.9, F=0.7)),
     fa=MetaHeuristic(fa.FA, dict(alpha=0.5, beta=0.2, gamma=1.0)),
     ga=MetaHeuristic(ga.GA, dict(p_selection=0.75, p_mutation=0.25, p_crossover=0.5)),
+    js=MetaHeuristic(js.JS, dict(eta=4.0, beta=3.0, gamma=0.1)),
     pso=MetaHeuristic(pso.PSO, dict(w=0.7, c1=1.7, c2=1.7))
 )
 
