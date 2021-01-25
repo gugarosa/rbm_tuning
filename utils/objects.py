@@ -80,6 +80,7 @@ MH = dict(
     fa=MetaHeuristic(fa.FA, dict(alpha=0.5, beta=0.2, gamma=1.0)),
     ga=MetaHeuristic(ga.GA, dict(p_selection=0.75, p_mutation=0.25, p_crossover=0.5)),
     js=MetaHeuristic(js.JS, dict(eta=4.0, beta=3.0, gamma=0.1)),
+    nbjs=MetaHeuristic(js.NBJS, dict(eta=4.0, beta=3.0, gamma=0.1)),
     pso=MetaHeuristic(pso.PSO, dict(w=0.7, c1=1.7, c2=1.7))
 )
 
