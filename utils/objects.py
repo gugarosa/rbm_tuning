@@ -14,7 +14,6 @@ class Model:
 
         Args:
             obj (RBM): An RBM-child instance.
-            hyperparams (dict): Meta-heuristic hyperparams.
 
         """
 
