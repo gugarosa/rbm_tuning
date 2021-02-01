@@ -5,6 +5,8 @@ import torchvision as tv
 
 # A constant used to hold a dictionary of possible datasets
 DATASETS = {
+    'fmnist': tv.datasets.FashionMNIST,
+    'kmnist': tv.datasets.KMNIST,
     'mnist': tv.datasets.MNIST
 }
 
