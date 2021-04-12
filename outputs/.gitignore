@@ -1,3 +1,6 @@
+# Saved outputs
+*.txt
+
 # Saved models
 *.pth
 *.history

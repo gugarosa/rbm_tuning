@@ -1,4 +1,4 @@
-from learnergy.models.bernoulli import DiscriminativeRBM, RBM
+from learnergy.models.bernoulli import RBM, DiscriminativeRBM
 from opytimizer.optimizers.evolutionary import de, ga
 from opytimizer.optimizers.science import bh
 from opytimizer.optimizers.swarm import ba, fa, js, pso

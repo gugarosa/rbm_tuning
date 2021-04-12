@@ -1,4 +1,5 @@
 import argparse
+import os
 
 import numpy as np
 import torch
@@ -37,6 +38,7 @@ if __name__ == '__main__':
     # Gathering common variables
     dataset = args.dataset
     input_file = args.input_file
+    output_file = input_file + '.txt'
     seed = args.seed
 
     # Loads the data
@@ -58,4 +60,7 @@ if __name__ == '__main__':
         # Reconstructs the test set
         output, _ = model.reconstruct(test)
 
-    print(output)
+    # Saves the result into an output file
+    with open(output_file, 'w') as f:
+        # Writes to file
+        f.write(str(output.detach().numpy()))
