@@ -55,5 +55,5 @@ if __name__ == '__main__':
         mean = np.mean(input_file_with_seeds_values, axis=0)
         input_files_means.append(mean)
 
-    # Plots the convergence of agent's and best agent's fitness
+    # Plots the convergence of best fitnesses
     c.plot(*input_files_means)
