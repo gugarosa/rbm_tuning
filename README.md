@@ -68,6 +68,14 @@ Finally, it is now possible to evaluate a model using the testing set. Please, u
 python rbm_evaluation.py -h
 ```
 
+### Analyze Optimization Convergence (Optional)
+
+Additionally, one can gather the optimization history files and input them to a script that analyzes its convergence and produces a plot that compares how each optimization technique has performed during its procedure. Please, use such a script as follows:
+
+```Python
+python analyze_optimization_convergence.py -h
+```
+
 ### Bash Script
 
 Instead of invoking every script to conduct the experiments, it is also possible to use the provided shell script, as follows:
